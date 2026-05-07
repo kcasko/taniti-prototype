@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Visit Taniti Prototype</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#home" aria-label="Visit Taniti home">Visit Taniti</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav id="site-nav" class="site-nav" aria-label="Main navigation">
+      <a href="#plan">Plan</a>
+      <a href="#stay">Stay</a>
+      <a href="#things">Things to Do</a>
+      <a href="#getting-around">Getting Around</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+  </header>
+
+  <main id="home">
+    <section class="hero" aria-labelledby="hero-title">
+      <img class="hero-media" src="taniti-banner.svg" alt="Simple Taniti beach, rainforest, and volcano illustration">
+      <div class="hero-copy">
+        <p class="eyebrow">Beaches, rainforest, volcano, and island culture</p>
+        <h1 id="hero-title">Visit Taniti</h1>
+        <p>Plan a welcoming island trip with lodging, activities, transportation, and practical visitor information in one mobile-friendly place.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#plan">Start planning</a>
+          <a class="button secondary" href="#things">Explore activities</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="plan" class="section plan-grid" aria-labelledby="plan-title">
+      <div>
+        <p class="eyebrow">Trip builder</p>
+        <h2 id="plan-title">Find options for your visit</h2>
+        <p class="section-copy">Choose a trip style and see recommended areas, transportation, and activities. This addresses first-time visitors who need clear choices before booking.</p>
+      </div>
+      <form class="trip-form" aria-label="Trip planning form">
+        <label>
+          Trip type
+          <select id="tripType">
+            <option value="family">Family vacation</option>
+            <option value="honeymoon">Honeymoon</option>
+            <option value="adventure">Adventure trip</option>
+            <option value="business">Business trip</option>
+          </select>
+        </label>
+        <label>
+          Length of stay
+          <select id="tripLength">
+            <option value="3">3 days</option>
+            <option value="5" selected>5 days</option>
+            <option value="7">7 days</option>
+            <option value="14">14 days</option>
+          </select>
+        </label>
+        <button class="button primary" type="button" id="buildTrip">Build sample itinerary</button>
+      </form>
+      <div class="itinerary" aria-live="polite">
+        <h3 id="itineraryTitle">Suggested 5-day family vacation itinerary</h3>
+        <ol id="itineraryList">
+          <li>Day 1: Arrive and explore Taniti City.</li>
+          <li>Day 2: Beach and history museum.</li>
+          <li>Day 3: Rainforest hike.</li>
+          <li>Day 4: Merriton Landing activities.</li>
+          <li>Day 5: Boat tour and departure.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="stay" class="section" aria-labelledby="stay-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Lodging</p>
+          <h2 id="stay-title">Book a place to stay</h2>
+        </div>
+        <a class="text-link" href="#faq">See visitor rules</a>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <h3>Hotels and Resort</h3>
+          <p>Choose regulated hotels, family-owned hotels, or the island's four-star resort.</p>
+          <a class="button secondary" href="#booking-links" data-toast="Hotel booking links opened">View hotel links</a>
+        </article>
+        <article class="card">
+          <h3>Bed and Breakfasts</h3>
+          <p>Stay near local neighborhoods and restaurants with smaller, inspected lodging.</p>
+          <a class="button secondary" href="#booking-links" data-toast="B&B booking links opened">View B&B links</a>
+        </article>
+        <article class="card">
+          <h3>Hostel and Private Rentals</h3>
+          <p>Compare budget stays, private condos, beach houses, and private homes.</p>
+          <a class="button secondary" href="#booking-links" data-toast="Rental booking links opened">View rental links</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="things" class="section" aria-labelledby="things-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Activities</p>
+          <h2 id="things-title">Things to do</h2>
+        </div>
+        <div class="filters" aria-label="Activity filters">
+          <button type="button" class="filter active" data-filter="all">All</button>
+          <button type="button" class="filter" data-filter="nature">Nature</button>
+          <button type="button" class="filter" data-filter="family">Family</button>
+          <button type="button" class="filter" data-filter="nightlife">Nightlife</button>
+        </div>
+      </div>
+      <div class="activity-list">
+        <article class="activity" data-category="nature">
+          <h3>Rainforest zip-line</h3>
+          <p>Explore the rainforest with a guided adventure near Merriton Landing.</p>
+          <button type="button" class="save">Save</button>
+        </article>
+        <article class="activity" data-category="nature">
+          <h3>Volcano hike</h3>
+          <p>Visit Taniti's active volcano with bus or boat tour options.</p>
+          <button type="button" class="save">Save</button>
+        </article>
+        <article class="activity" data-category="family">
+          <h3>History museum</h3>
+          <p>Learn about Tanitian culture in Taniti City before a beach afternoon.</p>
+          <button type="button" class="save">Save</button>
+        </article>
+        <article class="activity" data-category="family">
+          <h3>Snorkeling and fishing</h3>
+          <p>Book water activities from Yellow Leaf Bay and nearby beaches.</p>
+          <button type="button" class="save">Save</button>
+        </article>
+        <article class="activity" data-category="nightlife">
+          <h3>Pubs and dance club</h3>
+          <p>Visit the microbrewery, pubs, and dance club. Alcohol service ends at midnight.</p>
+          <button type="button" class="save">Save</button>
+        </article>
+      </div>
+      <div class="saved-panel" aria-live="polite">
+        <h3>Saved activities</h3>
+        <p id="savedEmpty">No activities saved yet.</p>
+        <ul id="savedActivities"></ul>
+      </div>
+    </section>
+
+    <section id="booking-links" class="section" aria-labelledby="booking-title">
+      <p class="eyebrow">Booking</p>
+      <h2 id="booking-title">Booking links</h2>
+      <h3>Hotel options</h3>
+      <div class="cards compact-cards">
+        <article class="card">
+          <h3>Yellow Leaf Bay Hotel</h3>
+          <p>Family-friendly hotel near Taniti City beaches. Estimated price range: $$.</p>
+          <button class="button secondary" type="button" data-toast="Prototype booking selected: Yellow Leaf Bay Hotel">Select hotel</button>
+        </article>
+        <article class="card">
+          <h3>Merriton Landing Inn</h3>
+          <p>Small hotel near restaurants, tours, and evening entertainment. Estimated price range: $.</p>
+          <button class="button secondary" type="button" data-toast="Prototype booking selected: Merriton Landing Inn">Select hotel</button>
+        </article>
+        <article class="card">
+          <h3>Taniti Four-Star Resort</h3>
+          <p>Resort lodging option for visitors who want more amenities. Estimated price range: $$$.</p>
+          <button class="button secondary" type="button" data-toast="Prototype booking selected: Taniti Four-Star Resort">Select hotel</button>
+        </article>
+      </div>
+      <h3>Other booking categories</h3>
+      <div class="cards">
+        <article class="card">
+          <h3>Lodging partners</h3>
+          <p>Links for hotel, resort, bed and breakfast, hostel, and private rental booking partners.</p>
+          <a class="text-link" href="#stay">Compare lodging</a>
+        </article>
+        <article class="card">
+          <h3>Tour operators</h3>
+          <p>Links for rainforest, volcano, snorkeling, fishing, helicopter, and boat tour options.</p>
+          <a class="text-link" href="#things">Compare activities</a>
+        </article>
+        <article class="card">
+          <h3>Transportation</h3>
+          <p>Links for rental cars, bike rentals, taxis, public buses, and private bus information.</p>
+          <a class="text-link" href="#getting-around">Compare transportation</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="getting-around" class="section split" aria-labelledby="transport-title">
+      <div>
+        <p class="eyebrow">Transportation</p>
+        <h2 id="transport-title">Getting around Taniti</h2>
+        <p>Most visitors arrive by air. Public buses serve Taniti City from 5 a.m. to 11 p.m.; private buses serve the rest of the island. Taxis, rental cars, bikes, and walking are practical choices depending on where visitors stay.</p>
+      </div>
+      <div class="transport-options">
+        <button type="button" data-panel="city">Taniti City</button>
+        <button type="button" data-panel="merriton">Merriton Landing</button>
+        <button type="button" data-panel="island">Whole island</button>
+        <p id="transportPanel">Taniti City is flat, walkable, and served by public buses and taxis.</p>
+      </div>
+    </section>
+
+    <section id="faq" class="section faq" aria-labelledby="faq-title">
+      <p class="eyebrow">Visitor information</p>
+      <h2 id="faq-title">Frequently requested information</h2>
+      <details>
+        <summary>What currency and outlets are used?</summary>
+        <p>Taniti uses the U.S. dollar, and power outlets are 120 volts.</p>
+      </details>
+      <details>
+        <summary>Will visitors need English translations?</summary>
+        <p>Many younger Tanitians speak fluent English. Rural areas may have less English fluency.</p>
+      </details>
+      <details>
+        <summary>Are attractions open every day?</summary>
+        <p>Many attractions and restaurants close on national holidays, so visitors should check dates before booking.</p>
+      </details>
+      <details>
+        <summary>Is Taniti safe?</summary>
+        <p>Violent crime is rare, but visitors should watch for pickpocketing as tourism increases.</p>
+      </details>
+      <details>
+        <summary>What medical help is available?</summary>
+        <p>Taniti has one hospital and several clinics. The hospital has many multilingual employees.</p>
+      </details>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>

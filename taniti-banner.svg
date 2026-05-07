@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="260" viewBox="0 0 1000 260">
+  <rect width="1000" height="260" fill="#eeeeee"/>
+  <path d="M0 190 C180 150 300 205 500 165 C700 125 820 180 1000 140 L1000 260 L0 260 Z" fill="#d9d9d9" stroke="#777" stroke-width="3"/>
+  <path d="M0 215 C190 195 380 235 560 205 C740 178 860 220 1000 200 L1000 260 L0 260 Z" fill="#cfcfcf" stroke="#777" stroke-width="3"/>
+  <path d="M360 145 L500 55 L640 145 Z" fill="#e4e4e4" stroke="#777" stroke-width="3"/>
+  <circle cx="820" cy="60" r="28" fill="#f9f9f9" stroke="#777" stroke-width="3"/>
+  <text x="500" y="238" text-anchor="middle" font-family="Arial" font-size="24" font-weight="700" fill="#444">Taniti beach, rainforest, and volcano</text>
+</svg>
