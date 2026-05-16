@@ -41,10 +41,6 @@ const itineraries = {
   }
 };
 
-document.querySelector("#buildTrip").addEventListener("click", () => {
-  updateItinerary();
-});
-
 document.querySelector("#tripType").addEventListener("change", updateItinerary);
 document.querySelector("#tripLength").addEventListener("change", updateItinerary);
 
@@ -53,9 +49,12 @@ function updateItinerary() {
   const length = document.querySelector("#tripLength").value;
   const list = document.querySelector("#itineraryList");
   const title = document.querySelector("#itineraryTitle");
-  list.innerHTML = "";
   const label = document.querySelector(`#tripType option[value="${type}"]`).textContent.toLowerCase();
+
+  list.innerHTML = "";
   title.textContent = `Suggested ${length}-day ${label} itinerary`;
+  document.querySelector("#summaryTrip").textContent = `${length}-day ${label}`;
+
   itineraries[type][length].forEach((item) => {
     const li = document.createElement("li");
     li.textContent = item;
@@ -86,11 +85,15 @@ document.querySelectorAll(".save").forEach((button) => {
 function updateSavedActivities() {
   const savedList = document.querySelector("#savedActivities");
   const empty = document.querySelector("#savedEmpty");
+  const summaryActivities = document.querySelector("#summaryActivities");
   savedList.innerHTML = "";
   const savedItems = [...document.querySelectorAll(".activity")]
     .filter((activity) => activity.querySelector(".save").classList.contains("saved"))
     .map((activity) => activity.querySelector("h3").textContent);
+
   empty.style.display = savedItems.length ? "none" : "block";
+  summaryActivities.textContent = savedItems.length ? savedItems.join(", ") : "None yet";
+
   savedItems.forEach((item) => {
     const li = document.createElement("li");
     li.textContent = item;
@@ -102,17 +105,97 @@ document.querySelectorAll("[data-toast]").forEach((button) => {
   button.addEventListener("click", () => showToast(button.dataset.toast));
 });
 
+document.querySelectorAll(".select-lodging").forEach((button) => {
+  button.addEventListener("click", () => {
+    const lodging = button.dataset.lodging;
+    document.querySelectorAll(".select-lodging").forEach((item) => {
+      item.classList.remove("selected");
+      item.textContent = "Select hotel";
+    });
+    button.classList.add("selected");
+    button.textContent = "Selected";
+    document.querySelector("#lodgingSelection").textContent = lodging;
+    document.querySelector("#summaryLodging").textContent = lodging;
+    showToast(`${lodging} added to current plan`);
+  });
+});
+
 const panels = {
-  city: "Taniti City is flat, walkable, and served by public buses and taxis.",
-  merriton: "Merriton Landing is easy to explore on foot and is close to many activities.",
+  city: "Taniti City is flat, walkable, and served by public buses and taxis from 5 a.m. to 11 p.m.",
+  merriton: "Merriton Landing is easy to explore on foot and is close to restaurants, tours, and nightlife.",
   island: "Use private buses, rental cars, or guided tours for volcano, rainforest, and island-wide trips."
 };
 
 document.querySelectorAll("[data-panel]").forEach((button) => {
   button.addEventListener("click", () => {
+    document.querySelectorAll("[data-panel]").forEach((item) => {
+      item.classList.remove("active");
+      item.setAttribute("aria-pressed", "false");
+    });
+    button.classList.add("active");
+    button.setAttribute("aria-pressed", "true");
     document.querySelector("#transportPanel").textContent = panels[button.dataset.panel];
   });
 });
+
+const mapLocations = {
+  city: {
+    type: "City center",
+    name: "Taniti City",
+    description: "Taniti City is the best base for first-time visitors who want restaurants, public buses, taxis, the history museum, and walkable access to city beaches.",
+    details: ["Best for: restaurants, museum, city beach", "Transportation: public buses, taxis, walking", "Nearby lodging: Yellow Leaf Bay Hotel"]
+  },
+  bay: {
+    type: "Beach area",
+    name: "Yellow Leaf Bay",
+    description: "Yellow Leaf Bay is a convenient beach area for families, snorkeling trips, fishing charters, and hotel stays close to Taniti City.",
+    details: ["Best for: family beach days, snorkeling, fishing", "Transportation: taxis, rental bikes, walking from nearby hotels", "Nearby lodging: Yellow Leaf Bay Hotel"]
+  },
+  merriton: {
+    type: "Entertainment district",
+    name: "Merriton Landing",
+    description: "Merriton Landing has many of Taniti's newer restaurants, pubs, tours, and evening activities within a compact walking area.",
+    details: ["Best for: dining, nightlife, tour departures", "Transportation: walking, taxis, private buses", "Nearby lodging: Merriton Landing Inn"]
+  },
+  rainforest: {
+    type: "Nature area",
+    name: "Rainforest",
+    description: "The rainforest is a strong choice for visitors looking for guided hikes, zip-line experiences, and nature-focused day trips.",
+    details: ["Best for: guided hikes and zip-line tours", "Transportation: private bus or guided tour", "Suggested pairing: Merriton Landing activities"]
+  },
+  volcano: {
+    type: "Landmark",
+    name: "Taniti Volcano",
+    description: "Taniti's active volcano is a signature nature stop and works best as a planned day trip by guided tour, private bus, or boat tour.",
+    details: ["Best for: adventure travelers and scenic tours", "Transportation: guided tour, private bus, or boat tour", "Suggested pairing: rainforest hike"]
+  }
+};
+
+document.querySelectorAll(".map-marker").forEach((button) => {
+  button.addEventListener("click", () => {
+    document.querySelectorAll(".map-marker").forEach((item) => {
+      item.classList.remove("active");
+      item.setAttribute("aria-pressed", "false");
+    });
+    button.classList.add("active");
+    button.setAttribute("aria-pressed", "true");
+    updateMapInfo(button.dataset.location);
+  });
+});
+
+function updateMapInfo(locationKey) {
+  const location = mapLocations[locationKey];
+  const details = document.querySelector("#mapDetails");
+  document.querySelector("#mapType").textContent = location.type;
+  document.querySelector("#mapName").textContent = location.name;
+  document.querySelector("#mapDescription").textContent = location.description;
+  details.innerHTML = "";
+  location.details.forEach((detail) => {
+    const li = document.createElement("li");
+    li.textContent = detail;
+    details.appendChild(li);
+  });
+}
 
 let toastTimer;
 function showToast(message) {

@@ -3,7 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Visit Taniti Prototype</title>
+  <meta name="description" content="Plan a Taniti island visit with lodging, sample itineraries, activities, transportation, an interactive map, and practical visitor information.">
+  <title>Visit Taniti | Trip Planner</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -14,6 +16,7 @@
       <a href="#plan">Plan</a>
       <a href="#stay">Stay</a>
       <a href="#things">Things to Do</a>
+      <a href="#map">Map</a>
       <a href="#getting-around">Getting Around</a>
       <a href="#faq">FAQ</a>
     </nav>
@@ -21,14 +24,14 @@
 
   <main id="home">
     <section class="hero" aria-labelledby="hero-title">
-      <img class="hero-media" src="taniti-banner.svg" alt="Simple Taniti beach, rainforest, and volcano illustration">
+      <img class="hero-media" src="taniti-banner.svg?v=2" alt="Taniti coastline with beach, rainforest, and volcano">
       <div class="hero-copy">
         <p class="eyebrow">Beaches, rainforest, volcano, and island culture</p>
         <h1 id="hero-title">Visit Taniti</h1>
         <p>Plan a welcoming island trip with lodging, activities, transportation, and practical visitor information in one mobile-friendly place.</p>
         <div class="hero-actions">
           <a class="button primary" href="#plan">Start planning</a>
-          <a class="button secondary" href="#things">Explore activities</a>
+          <a class="button secondary" href="#map">Open map</a>
         </div>
       </div>
     </section>
@@ -37,7 +40,7 @@
       <div>
         <p class="eyebrow">Trip builder</p>
         <h2 id="plan-title">Find options for your visit</h2>
-        <p class="section-copy">Choose a trip style and see recommended areas, transportation, and activities. This addresses first-time visitors who need clear choices before booking.</p>
+        <p class="section-copy">Choose a trip style and see recommended lodging, transportation, and activities for the length of stay.</p>
       </div>
       <form class="trip-form" aria-label="Trip planning form">
         <label>
@@ -58,8 +61,24 @@
             <option value="14">14 days</option>
           </select>
         </label>
-        <button class="button primary" type="button" id="buildTrip">Build sample itinerary</button>
       </form>
+      <aside class="trip-summary" aria-live="polite" aria-labelledby="summaryTitle">
+        <h3 id="summaryTitle">Current plan</h3>
+        <dl>
+          <div>
+            <dt>Trip</dt>
+            <dd id="summaryTrip">5-day family vacation</dd>
+          </div>
+          <div>
+            <dt>Lodging</dt>
+            <dd id="summaryLodging">Not selected</dd>
+          </div>
+          <div>
+            <dt>Saved activities</dt>
+            <dd id="summaryActivities">None yet</dd>
+          </div>
+        </dl>
+      </aside>
       <div class="itinerary" aria-live="polite">
         <h3 id="itineraryTitle">Suggested 5-day family vacation itinerary</h3>
         <ol id="itineraryList">
@@ -72,7 +91,7 @@
       </div>
     </section>
 
-    <section id="stay" class="section" aria-labelledby="stay-title">
+    <section id="stay" class="section section-band" aria-labelledby="stay-title">
       <div class="section-heading">
         <div>
           <p class="eyebrow">Lodging</p>
@@ -146,25 +165,29 @@
       </div>
     </section>
 
-    <section id="booking-links" class="section" aria-labelledby="booking-title">
+    <section id="booking-links" class="section section-band" aria-labelledby="booking-title">
       <p class="eyebrow">Booking</p>
       <h2 id="booking-title">Booking links</h2>
+      <div class="selection-callout" aria-live="polite">
+        <strong>Selected lodging:</strong>
+        <span id="lodgingSelection">None selected yet</span>
+      </div>
       <h3>Hotel options</h3>
       <div class="cards compact-cards">
         <article class="card">
           <h3>Yellow Leaf Bay Hotel</h3>
           <p>Family-friendly hotel near Taniti City beaches. Estimated price range: $$.</p>
-          <button class="button secondary" type="button" data-toast="Prototype booking selected: Yellow Leaf Bay Hotel">Select hotel</button>
+          <button class="button secondary select-lodging" type="button" data-lodging="Yellow Leaf Bay Hotel">Select hotel</button>
         </article>
         <article class="card">
           <h3>Merriton Landing Inn</h3>
           <p>Small hotel near restaurants, tours, and evening entertainment. Estimated price range: $.</p>
-          <button class="button secondary" type="button" data-toast="Prototype booking selected: Merriton Landing Inn">Select hotel</button>
+          <button class="button secondary select-lodging" type="button" data-lodging="Merriton Landing Inn">Select hotel</button>
         </article>
         <article class="card">
           <h3>Taniti Four-Star Resort</h3>
           <p>Resort lodging option for visitors who want more amenities. Estimated price range: $$$.</p>
-          <button class="button secondary" type="button" data-toast="Prototype booking selected: Taniti Four-Star Resort">Select hotel</button>
+          <button class="button secondary select-lodging" type="button" data-lodging="Taniti Four-Star Resort">Select hotel</button>
         </article>
       </div>
       <h3>Other booking categories</h3>
@@ -187,16 +210,44 @@
       </div>
     </section>
 
-    <section id="getting-around" class="section split" aria-labelledby="transport-title">
+    <section id="map" class="section map-section" aria-labelledby="map-title">
+      <div>
+        <p class="eyebrow">Island map</p>
+        <h2 id="map-title">Explore Taniti by area</h2>
+        <p class="section-copy">Select a place on the map to see lodging, activities, and transportation details.</p>
+      </div>
+      <div class="map-layout">
+        <div class="map-canvas" role="img" aria-label="Interactive map of Taniti with selectable locations">
+          <div class="island-shape" aria-hidden="true"></div>
+          <button type="button" class="map-marker city active" data-location="city" aria-pressed="true">Taniti City</button>
+          <button type="button" class="map-marker bay" data-location="bay" aria-pressed="false">Yellow Leaf Bay</button>
+          <button type="button" class="map-marker merriton" data-location="merriton" aria-pressed="false">Merriton Landing</button>
+          <button type="button" class="map-marker rainforest" data-location="rainforest" aria-pressed="false">Rainforest</button>
+          <button type="button" class="map-marker volcano" data-location="volcano" aria-pressed="false">Volcano</button>
+        </div>
+        <article class="map-info" aria-live="polite">
+          <p class="eyebrow" id="mapType">City center</p>
+          <h3 id="mapName">Taniti City</h3>
+          <p id="mapDescription">Taniti City is the best base for first-time visitors who want restaurants, public buses, taxis, the history museum, and walkable access to city beaches.</p>
+          <ul id="mapDetails">
+            <li>Best for: restaurants, museum, city beach</li>
+            <li>Transportation: public buses, taxis, walking</li>
+            <li>Nearby lodging: Yellow Leaf Bay Hotel</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="getting-around" class="section split section-band" aria-labelledby="transport-title">
       <div>
         <p class="eyebrow">Transportation</p>
         <h2 id="transport-title">Getting around Taniti</h2>
         <p>Most visitors arrive by air. Public buses serve Taniti City from 5 a.m. to 11 p.m.; private buses serve the rest of the island. Taxis, rental cars, bikes, and walking are practical choices depending on where visitors stay.</p>
       </div>
       <div class="transport-options">
-        <button type="button" data-panel="city">Taniti City</button>
-        <button type="button" data-panel="merriton">Merriton Landing</button>
-        <button type="button" data-panel="island">Whole island</button>
+        <button type="button" class="active" data-panel="city" aria-pressed="true">Taniti City</button>
+        <button type="button" data-panel="merriton" aria-pressed="false">Merriton Landing</button>
+        <button type="button" data-panel="island" aria-pressed="false">Whole island</button>
         <p id="transportPanel">Taniti City is flat, walkable, and served by public buses and taxis.</p>
       </div>
     </section>
