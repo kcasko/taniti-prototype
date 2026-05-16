@@ -183,6 +183,12 @@ summary:focus-visible {
   transform: translateY(-1px);
 }
 
+button:disabled {
+  cursor: not-allowed;
+  opacity: .52;
+  transform: none;
+}
+
 .primary {
   background: var(--accent);
   border-color: var(--accent);
@@ -301,6 +307,45 @@ select {
   grid-column: 1 / -1;
   padding: 20px 24px;
   border-left: 6px solid var(--forest);
+}
+
+.itinerary-focus {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px 20px;
+  align-items: center;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #f7fbfa;
+}
+
+.itinerary-step {
+  margin: 0;
+  color: var(--accent-strong);
+  font-size: .82rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.itinerary-day {
+  grid-column: 1 / -1;
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 800;
+}
+
+.itinerary-controls {
+  grid-row: 1;
+  grid-column: 2;
+  display: flex;
+  gap: 8px;
+}
+
+.full-itinerary {
+  margin-top: 14px;
+  border-top: 1px solid var(--line);
+  padding-top: 14px;
 }
 
 .itinerary ol {
@@ -592,6 +637,15 @@ summary {
 
   .itinerary ol {
     columns: 1;
+  }
+
+  .itinerary-focus {
+    grid-template-columns: 1fr;
+  }
+
+  .itinerary-controls {
+    grid-row: auto;
+    grid-column: auto;
   }
 }
 

@@ -41,8 +41,20 @@ const itineraries = {
   }
 };
 
+const recommendedBases = {
+  family: "Yellow Leaf Bay Hotel",
+  honeymoon: "Taniti Four-Star Resort",
+  adventure: "Merriton Landing Inn",
+  business: "Taniti City business hotel"
+};
+
+let currentItineraryItems = itineraries.family["5"];
+let currentDayIndex = 0;
+
 document.querySelector("#tripType").addEventListener("change", updateItinerary);
 document.querySelector("#tripLength").addEventListener("change", updateItinerary);
+document.querySelector("#prevDay").addEventListener("click", () => changeItineraryDay(-1));
+document.querySelector("#nextDay").addEventListener("click", () => changeItineraryDay(1));
 
 function updateItinerary() {
   const type = document.querySelector("#tripType").value;
@@ -54,12 +66,28 @@ function updateItinerary() {
   list.innerHTML = "";
   title.textContent = `Suggested ${length}-day ${label} itinerary`;
   document.querySelector("#summaryTrip").textContent = `${length}-day ${label}`;
+  document.querySelector("#summaryBase").textContent = recommendedBases[type];
+  currentItineraryItems = itineraries[type][length];
+  currentDayIndex = 0;
 
-  itineraries[type][length].forEach((item) => {
+  currentItineraryItems.forEach((item) => {
     const li = document.createElement("li");
     li.textContent = item;
     list.appendChild(li);
   });
+  updateItineraryFocus();
+}
+
+function changeItineraryDay(direction) {
+  currentDayIndex = Math.min(Math.max(currentDayIndex + direction, 0), currentItineraryItems.length - 1);
+  updateItineraryFocus();
+}
+
+function updateItineraryFocus() {
+  document.querySelector("#itineraryStep").textContent = `Item ${currentDayIndex + 1} of ${currentItineraryItems.length}`;
+  document.querySelector("#itineraryDay").textContent = currentItineraryItems[currentDayIndex];
+  document.querySelector("#prevDay").disabled = currentDayIndex === 0;
+  document.querySelector("#nextDay").disabled = currentDayIndex === currentItineraryItems.length - 1;
 }
 
 document.querySelectorAll(".filter").forEach((button) => {
@@ -204,3 +232,5 @@ function showToast(message) {
   clearTimeout(toastTimer);
   toastTimer = setTimeout(() => toast.classList.remove("visible"), 1800);
 }
+
+updateItinerary();

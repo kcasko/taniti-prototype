@@ -74,6 +74,10 @@
             <dd id="summaryLodging">Not selected</dd>
           </div>
           <div>
+            <dt>Recommended base</dt>
+            <dd id="summaryBase">Yellow Leaf Bay Hotel</dd>
+          </div>
+          <div>
             <dt>Saved activities</dt>
             <dd id="summaryActivities">None yet</dd>
           </div>
@@ -81,13 +85,24 @@
       </aside>
       <div class="itinerary" aria-live="polite">
         <h3 id="itineraryTitle">Suggested 5-day family vacation itinerary</h3>
-        <ol id="itineraryList">
-          <li>Day 1: Arrive and explore Taniti City.</li>
-          <li>Day 2: Beach and history museum.</li>
-          <li>Day 3: Rainforest hike.</li>
-          <li>Day 4: Merriton Landing activities.</li>
-          <li>Day 5: Boat tour and departure.</li>
-        </ol>
+        <div class="itinerary-focus">
+          <p class="itinerary-step" id="itineraryStep">Day 1 of 5</p>
+          <p class="itinerary-day" id="itineraryDay">Day 1: Arrive and explore Taniti City.</p>
+          <div class="itinerary-controls" aria-label="Itinerary day controls">
+            <button class="button secondary" type="button" id="prevDay">Previous</button>
+            <button class="button secondary" type="button" id="nextDay">Next</button>
+          </div>
+        </div>
+        <details class="full-itinerary">
+          <summary>View full itinerary</summary>
+          <ol id="itineraryList">
+            <li>Day 1: Arrive and explore Taniti City.</li>
+            <li>Day 2: Beach and history museum.</li>
+            <li>Day 3: Rainforest hike.</li>
+            <li>Day 4: Merriton Landing activities.</li>
+            <li>Day 5: Boat tour and departure.</li>
+          </ol>
+        </details>
       </div>
     </section>
 
