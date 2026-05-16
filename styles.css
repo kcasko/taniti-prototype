@@ -2,12 +2,15 @@
   --ink: #202427;
   --muted: #5c6670;
   --line: #d8dde2;
-  --paper: #f7f8f8;
+  --paper: #f8faf8;
   --surface: #ffffff;
-  --band: #eef3f2;
-  --accent: #1f6f68;
-  --accent-dark: #124b47;
-  --warning: #b85f42;
+  --band: #edf7f4;
+  --accent: #08766f;
+  --accent-dark: #064f4c;
+  --sky: #d9eef5;
+  --sun: #f5bf4f;
+  --coral: #d46b4d;
+  --leaf: #2f8a5b;
   --shadow: 0 8px 20px rgba(32, 36, 39, .08);
 }
 
@@ -49,7 +52,7 @@ summary:focus-visible {
   justify-content: space-between;
   gap: 20px;
   padding: 14px 28px;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 3px solid var(--sky);
   background: rgba(255, 255, 255, .97);
 }
 
@@ -83,7 +86,9 @@ summary:focus-visible {
 }
 
 .hero {
-  background: var(--surface);
+  background:
+    linear-gradient(135deg, rgba(217, 238, 245, .9), rgba(237, 247, 244, .55) 48%, rgba(245, 191, 79, .24)),
+    var(--surface);
   border-bottom: 1px solid var(--line);
 }
 
@@ -99,6 +104,7 @@ summary:focus-visible {
   font-size: clamp(3rem, 7vw, 5.5rem);
   line-height: 1;
   letter-spacing: 0;
+  color: var(--accent-dark);
 }
 
 .hero p {
@@ -109,7 +115,7 @@ summary:focus-visible {
 
 .eyebrow {
   margin: 0 0 8px;
-  color: var(--accent-dark);
+  color: var(--coral);
   font-size: .78rem;
   font-weight: 800;
   letter-spacing: .04em;
@@ -168,18 +174,21 @@ button:disabled {
 
 .secondary {
   color: var(--accent-dark);
+  background: #fbf6e8;
+  border-color: #eedca9;
 }
 
 .section {
   width: min(1040px, 100%);
   margin: 0 auto;
   padding: 56px 28px;
+  scroll-margin-top: 78px;
 }
 
 .section-band {
   width: 100%;
   max-width: none;
-  background: var(--band);
+  background: linear-gradient(180deg, var(--band), #f8faf8);
 }
 
 .section-band > * {
@@ -222,6 +231,11 @@ button:disabled {
   border-radius: 6px;
   background: var(--surface);
   box-shadow: var(--shadow);
+}
+
+.trip-form,
+.trip-summary {
+  border-top: 4px solid var(--sky);
 }
 
 .trip-form,
@@ -292,6 +306,7 @@ select {
 .itinerary {
   grid-column: 1 / -1;
   padding: 20px;
+  border-top: 4px solid var(--leaf);
 }
 
 .itinerary-focus {
@@ -302,7 +317,7 @@ select {
   padding: 16px;
   border: 1px solid var(--line);
   border-radius: 6px;
-  background: #fbfbfa;
+  background: #f5fbf8;
 }
 
 .itinerary-step {
@@ -367,6 +382,15 @@ select {
   align-content: start;
   gap: 12px;
   padding: 18px;
+  border-top: 4px solid var(--sky);
+}
+
+.card:nth-child(2n) {
+  border-top-color: var(--sun);
+}
+
+.card:nth-child(3n) {
+  border-top-color: var(--coral);
 }
 
 .card h3,
@@ -409,7 +433,7 @@ select {
 .saved-panel {
   margin-top: 16px;
   padding: 18px;
-  border-left: 4px solid var(--accent);
+  border-left: 4px solid var(--leaf);
 }
 
 .saved-panel h3 {
@@ -419,11 +443,13 @@ select {
 .selection-callout {
   margin: 10px 0 20px;
   padding: 14px 16px;
-  border-left: 4px solid var(--accent);
+  border-left: 4px solid var(--sun);
+  background: #fffaf0;
 }
 
 .booking-form {
   margin: 12px auto 24px;
+  scroll-margin-top: 78px;
 }
 
 .form-grid {
@@ -435,7 +461,10 @@ select {
 
 .confirmation-panel {
   margin: 12px auto 28px;
-  border-color: rgba(31, 111, 104, .45);
+  border-color: rgba(47, 138, 91, .45);
+  border-top: 4px solid var(--leaf);
+  background: #f6fbf7;
+  scroll-margin-top: 78px;
 }
 
 .confirmation-panel[hidden] {
@@ -453,6 +482,7 @@ select {
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
   padding: 18px;
+  border-top: 4px solid var(--sky);
 }
 
 .transport-options p {
