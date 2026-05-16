@@ -144,8 +144,32 @@ document.querySelectorAll(".select-lodging").forEach((button) => {
     button.textContent = "Selected";
     document.querySelector("#lodgingSelection").textContent = lodging;
     document.querySelector("#summaryLodging").textContent = lodging;
+    document.querySelector("#bookingForm").scrollIntoView({ behavior: "smooth", block: "start" });
     showToast(`${lodging} added to current plan`);
   });
+});
+
+document.querySelector("#bookingForm").addEventListener("submit", (event) => {
+  event.preventDefault();
+  const lodging = document.querySelector("#summaryLodging").textContent;
+  const guest = document.querySelector("#guestName").value.trim();
+  const email = document.querySelector("#guestEmail").value.trim();
+  const arrival = document.querySelector("#arrivalDate").value;
+  const guests = document.querySelector("#guestCount").value;
+
+  if (lodging === "Not selected") {
+    showToast("Select a hotel before confirming");
+    return;
+  }
+
+  document.querySelector("#confirmLodging").textContent = lodging;
+  document.querySelector("#confirmGuest").textContent = guest;
+  document.querySelector("#confirmArrival").textContent = arrival;
+  document.querySelector("#confirmGuests").textContent = guests;
+  document.querySelector("#confirmationText").textContent = `A prototype confirmation for ${guest} has been created and would be sent to ${email}.`;
+  document.querySelector("#confirmation").hidden = false;
+  document.querySelector("#confirmation").scrollIntoView({ behavior: "smooth", block: "start" });
+  showToast("Booking request confirmed");
 });
 
 const panels = {
@@ -165,65 +189,6 @@ document.querySelectorAll("[data-panel]").forEach((button) => {
     document.querySelector("#transportPanel").textContent = panels[button.dataset.panel];
   });
 });
-
-const mapLocations = {
-  city: {
-    type: "City center",
-    name: "Taniti City",
-    description: "Taniti City is the best base for first-time visitors who want restaurants, public buses, taxis, the history museum, and walkable access to city beaches.",
-    details: ["Best for: restaurants, museum, city beach", "Transportation: public buses, taxis, walking", "Nearby lodging: Yellow Leaf Bay Hotel"]
-  },
-  bay: {
-    type: "Beach area",
-    name: "Yellow Leaf Bay",
-    description: "Yellow Leaf Bay is a convenient beach area for families, snorkeling trips, fishing charters, and hotel stays close to Taniti City.",
-    details: ["Best for: family beach days, snorkeling, fishing", "Transportation: taxis, rental bikes, walking from nearby hotels", "Nearby lodging: Yellow Leaf Bay Hotel"]
-  },
-  merriton: {
-    type: "Entertainment district",
-    name: "Merriton Landing",
-    description: "Merriton Landing has many of Taniti's newer restaurants, pubs, tours, and evening activities within a compact walking area.",
-    details: ["Best for: dining, nightlife, tour departures", "Transportation: walking, taxis, private buses", "Nearby lodging: Merriton Landing Inn"]
-  },
-  rainforest: {
-    type: "Nature area",
-    name: "Rainforest",
-    description: "The rainforest is a strong choice for visitors looking for guided hikes, zip-line experiences, and nature-focused day trips.",
-    details: ["Best for: guided hikes and zip-line tours", "Transportation: private bus or guided tour", "Suggested pairing: Merriton Landing activities"]
-  },
-  volcano: {
-    type: "Landmark",
-    name: "Taniti Volcano",
-    description: "Taniti's active volcano is a signature nature stop and works best as a planned day trip by guided tour, private bus, or boat tour.",
-    details: ["Best for: adventure travelers and scenic tours", "Transportation: guided tour, private bus, or boat tour", "Suggested pairing: rainforest hike"]
-  }
-};
-
-document.querySelectorAll(".map-marker").forEach((button) => {
-  button.addEventListener("click", () => {
-    document.querySelectorAll(".map-marker").forEach((item) => {
-      item.classList.remove("active");
-      item.setAttribute("aria-pressed", "false");
-    });
-    button.classList.add("active");
-    button.setAttribute("aria-pressed", "true");
-    updateMapInfo(button.dataset.location);
-  });
-});
-
-function updateMapInfo(locationKey) {
-  const location = mapLocations[locationKey];
-  const details = document.querySelector("#mapDetails");
-  document.querySelector("#mapType").textContent = location.type;
-  document.querySelector("#mapName").textContent = location.name;
-  document.querySelector("#mapDescription").textContent = location.description;
-  details.innerHTML = "";
-  location.details.forEach((detail) => {
-    const li = document.createElement("li");
-    li.textContent = detail;
-    details.appendChild(li);
-  });
-}
 
 let toastTimer;
 function showToast(message) {

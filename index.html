@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Plan a Taniti island visit with lodging, sample itineraries, activities, transportation, an interactive map, and practical visitor information.">
+  <meta name="description" content="Plan a Taniti island visit with lodging, sample itineraries, activities, transportation, booking confirmation, and practical visitor information.">
   <title>Visit Taniti | Trip Planner</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
@@ -16,7 +16,7 @@
       <a href="#plan">Plan</a>
       <a href="#stay">Stay</a>
       <a href="#things">Things to Do</a>
-      <a href="#map">Map</a>
+      <a href="#booking-links">Booking</a>
       <a href="#getting-around">Getting Around</a>
       <a href="#faq">FAQ</a>
     </nav>
@@ -24,14 +24,13 @@
 
   <main id="home">
     <section class="hero" aria-labelledby="hero-title">
-      <img class="hero-media" src="taniti-banner.svg?v=2" alt="Taniti coastline with beach, rainforest, and volcano">
       <div class="hero-copy">
         <p class="eyebrow">Beaches, rainforest, volcano, and island culture</p>
         <h1 id="hero-title">Visit Taniti</h1>
-        <p>Plan a welcoming island trip with lodging, activities, transportation, and practical visitor information in one mobile-friendly place.</p>
+        <p>Plan lodging, activities, transportation, and practical visitor details for a first-time trip to Taniti.</p>
         <div class="hero-actions">
           <a class="button primary" href="#plan">Start planning</a>
-          <a class="button secondary" href="#map">Open map</a>
+          <a class="button secondary" href="#booking-links">Book lodging</a>
         </div>
       </div>
     </section>
@@ -182,7 +181,7 @@
 
     <section id="booking-links" class="section section-band" aria-labelledby="booking-title">
       <p class="eyebrow">Booking</p>
-      <h2 id="booking-title">Booking links</h2>
+      <h2 id="booking-title">Book lodging</h2>
       <div class="selection-callout" aria-live="polite">
         <strong>Selected lodging:</strong>
         <span id="lodgingSelection">None selected yet</span>
@@ -205,6 +204,57 @@
           <button class="button secondary select-lodging" type="button" data-lodging="Taniti Four-Star Resort">Select hotel</button>
         </article>
       </div>
+      <form class="booking-form" id="bookingForm" aria-label="Booking form">
+        <h3>Guest details</h3>
+        <div class="form-grid">
+          <label>
+            Guest name
+            <input id="guestName" name="guestName" autocomplete="name" required>
+          </label>
+          <label>
+            Email
+            <input id="guestEmail" name="guestEmail" type="email" autocomplete="email" required>
+          </label>
+          <label>
+            Arrival date
+            <input id="arrivalDate" name="arrivalDate" type="date" required>
+          </label>
+          <label>
+            Guests
+            <select id="guestCount" name="guestCount">
+              <option>1 guest</option>
+              <option selected>2 guests</option>
+              <option>3 guests</option>
+              <option>4 guests</option>
+              <option>5+ guests</option>
+            </select>
+          </label>
+        </div>
+        <button class="button primary" type="submit">Confirm booking</button>
+      </form>
+      <section class="confirmation-panel" id="confirmation" aria-live="polite" hidden>
+        <p class="eyebrow">Confirmation</p>
+        <h3>Booking request confirmed</h3>
+        <p id="confirmationText"></p>
+        <dl>
+          <div>
+            <dt>Lodging</dt>
+            <dd id="confirmLodging"></dd>
+          </div>
+          <div>
+            <dt>Guest</dt>
+            <dd id="confirmGuest"></dd>
+          </div>
+          <div>
+            <dt>Arrival</dt>
+            <dd id="confirmArrival"></dd>
+          </div>
+          <div>
+            <dt>Travelers</dt>
+            <dd id="confirmGuests"></dd>
+          </div>
+        </dl>
+      </section>
       <h3>Other booking categories</h3>
       <div class="cards">
         <article class="card">
@@ -221,34 +271,6 @@
           <h3>Transportation</h3>
           <p>Links for rental cars, bike rentals, taxis, public buses, and private bus information.</p>
           <a class="text-link" href="#getting-around">Compare transportation</a>
-        </article>
-      </div>
-    </section>
-
-    <section id="map" class="section map-section" aria-labelledby="map-title">
-      <div>
-        <p class="eyebrow">Island map</p>
-        <h2 id="map-title">Explore Taniti by area</h2>
-        <p class="section-copy">Select a place on the map to see lodging, activities, and transportation details.</p>
-      </div>
-      <div class="map-layout">
-        <div class="map-canvas" role="img" aria-label="Interactive map of Taniti with selectable locations">
-          <div class="island-shape" aria-hidden="true"></div>
-          <button type="button" class="map-marker city active" data-location="city" aria-pressed="true">Taniti City</button>
-          <button type="button" class="map-marker bay" data-location="bay" aria-pressed="false">Yellow Leaf Bay</button>
-          <button type="button" class="map-marker merriton" data-location="merriton" aria-pressed="false">Merriton Landing</button>
-          <button type="button" class="map-marker rainforest" data-location="rainforest" aria-pressed="false">Rainforest</button>
-          <button type="button" class="map-marker volcano" data-location="volcano" aria-pressed="false">Volcano</button>
-        </div>
-        <article class="map-info" aria-live="polite">
-          <p class="eyebrow" id="mapType">City center</p>
-          <h3 id="mapName">Taniti City</h3>
-          <p id="mapDescription">Taniti City is the best base for first-time visitors who want restaurants, public buses, taxis, the history museum, and walkable access to city beaches.</p>
-          <ul id="mapDetails">
-            <li>Best for: restaurants, museum, city beach</li>
-            <li>Transportation: public buses, taxis, walking</li>
-            <li>Nearby lodging: Yellow Leaf Bay Hotel</li>
-          </ul>
         </article>
       </div>
     </section>
