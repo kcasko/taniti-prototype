@@ -1,17 +1,20 @@
 :root {
-  --ink: #202427;
-  --muted: #5c6670;
-  --line: #d8dde2;
-  --paper: #f8faf8;
+  --ink: #14323a;
+  --muted: #52636a;
+  --line: #c8dde2;
+  --paper: #f5fbff;
   --surface: #ffffff;
-  --band: #edf7f4;
-  --accent: #08766f;
-  --accent-dark: #064f4c;
-  --sky: #d9eef5;
-  --sun: #f5bf4f;
-  --coral: #d46b4d;
-  --leaf: #2f8a5b;
-  --shadow: 0 8px 20px rgba(32, 36, 39, .08);
+  --band: #dff7f3;
+  --accent: #008b8b;
+  --accent-dark: #005f65;
+  --ocean: #0096c7;
+  --sky: #9be7ff;
+  --sun: #ffc947;
+  --coral: #ff6f59;
+  --hibiscus: #d83f87;
+  --leaf: #2fb36d;
+  --sand: #fff0bd;
+  --shadow: 0 14px 32px rgba(0, 95, 101, .14);
 }
 
 * {
@@ -24,7 +27,9 @@ html {
 
 body {
   margin: 0;
-  background: var(--paper);
+  background:
+    linear-gradient(180deg, #e8fbff 0, var(--paper) 520px),
+    var(--paper);
   color: var(--ink);
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.55;
@@ -52,12 +57,12 @@ summary:focus-visible {
   justify-content: space-between;
   gap: 20px;
   padding: 14px 28px;
-  border-bottom: 3px solid var(--sky);
+  border-bottom: 4px solid var(--sun);
   background: rgba(255, 255, 255, .97);
 }
 
 .brand {
-  color: var(--accent-dark);
+  color: var(--hibiscus);
   font-size: 1.15rem;
   font-weight: 800;
   text-decoration: none;
@@ -86,16 +91,34 @@ summary:focus-visible {
 }
 
 .hero {
+  position: relative;
+  overflow: hidden;
+  color: white;
   background:
-    linear-gradient(135deg, rgba(217, 238, 245, .9), rgba(237, 247, 244, .55) 48%, rgba(245, 191, 79, .24)),
-    var(--surface);
-  border-bottom: 1px solid var(--line);
+    radial-gradient(circle at 82% 18%, rgba(255, 201, 71, .95) 0 58px, transparent 60px),
+    linear-gradient(135deg, rgba(0, 150, 199, .95), rgba(0, 139, 139, .9) 46%, rgba(47, 179, 109, .78)),
+    var(--accent);
+  border-bottom: 0;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  left: -4%;
+  right: -4%;
+  bottom: -54px;
+  height: 118px;
+  background: var(--sand);
+  border-radius: 50% 50% 0 0;
+  transform: rotate(-2deg);
 }
 
 .hero-copy {
+  position: relative;
+  z-index: 1;
   width: min(1040px, 100%);
   margin: 0 auto;
-  padding: 78px 28px 70px;
+  padding: 86px 28px 94px;
 }
 
 .hero h1 {
@@ -104,18 +127,19 @@ summary:focus-visible {
   font-size: clamp(3rem, 7vw, 5.5rem);
   line-height: 1;
   letter-spacing: 0;
-  color: var(--accent-dark);
+  color: white;
+  text-shadow: 0 3px 18px rgba(0, 65, 72, .28);
 }
 
 .hero p {
   max-width: 58ch;
-  color: var(--muted);
+  color: rgba(255, 255, 255, .94);
   font-size: 1.08rem;
 }
 
 .eyebrow {
   margin: 0 0 8px;
-  color: var(--coral);
+  color: var(--hibiscus);
   font-size: .78rem;
   font-weight: 800;
   letter-spacing: .04em;
@@ -167,15 +191,21 @@ button:disabled {
 }
 
 .primary {
-  background: var(--accent);
-  border-color: var(--accent);
+  background: linear-gradient(135deg, var(--hibiscus), var(--coral));
+  border-color: transparent;
   color: white;
 }
 
 .secondary {
   color: var(--accent-dark);
-  background: #fbf6e8;
-  border-color: #eedca9;
+  background: var(--sand);
+  border-color: #f4d66f;
+}
+
+.hero .secondary {
+  background: white;
+  border-color: white;
+  color: var(--accent-dark);
 }
 
 .section {
@@ -188,7 +218,9 @@ button:disabled {
 .section-band {
   width: 100%;
   max-width: none;
-  background: linear-gradient(180deg, var(--band), #f8faf8);
+  background:
+    linear-gradient(135deg, rgba(155, 231, 255, .38), rgba(255, 240, 189, .44)),
+    var(--band);
 }
 
 .section-band > * {
@@ -235,7 +267,7 @@ button:disabled {
 
 .trip-form,
 .trip-summary {
-  border-top: 4px solid var(--sky);
+  border-top: 5px solid var(--ocean);
 }
 
 .trip-form,
@@ -306,7 +338,7 @@ select {
 .itinerary {
   grid-column: 1 / -1;
   padding: 20px;
-  border-top: 4px solid var(--leaf);
+  border-top: 5px solid var(--leaf);
 }
 
 .itinerary-focus {
@@ -317,7 +349,7 @@ select {
   padding: 16px;
   border: 1px solid var(--line);
   border-radius: 6px;
-  background: #f5fbf8;
+  background: linear-gradient(135deg, #f3fff7, #ecfbff);
 }
 
 .itinerary-step {
@@ -382,7 +414,7 @@ select {
   align-content: start;
   gap: 12px;
   padding: 18px;
-  border-top: 4px solid var(--sky);
+  border-top: 5px solid var(--ocean);
 }
 
 .card:nth-child(2n) {
@@ -390,7 +422,14 @@ select {
 }
 
 .card:nth-child(3n) {
-  border-top-color: var(--coral);
+  border-top-color: var(--hibiscus);
+}
+
+.card:hover,
+.activity:hover {
+  transform: translateY(-2px);
+  transition: transform .16s ease, box-shadow .16s ease;
+  box-shadow: 0 18px 36px rgba(0, 95, 101, .16);
 }
 
 .card h3,
@@ -402,8 +441,8 @@ select {
 .transport-options button.active,
 .save.saved,
 .select-lodging.selected {
-  background: var(--accent);
-  border-color: var(--accent);
+  background: linear-gradient(135deg, var(--accent), var(--ocean));
+  border-color: transparent;
   color: white;
 }
 
@@ -433,7 +472,8 @@ select {
 .saved-panel {
   margin-top: 16px;
   padding: 18px;
-  border-left: 4px solid var(--leaf);
+  border-left: 5px solid var(--leaf);
+  background: #f3fff7;
 }
 
 .saved-panel h3 {
@@ -443,8 +483,8 @@ select {
 .selection-callout {
   margin: 10px 0 20px;
   padding: 14px 16px;
-  border-left: 4px solid var(--sun);
-  background: #fffaf0;
+  border-left: 5px solid var(--sun);
+  background: linear-gradient(135deg, #fff9df, #ffffff);
 }
 
 .booking-form {
@@ -462,8 +502,8 @@ select {
 .confirmation-panel {
   margin: 12px auto 28px;
   border-color: rgba(47, 138, 91, .45);
-  border-top: 4px solid var(--leaf);
-  background: #f6fbf7;
+  border-top: 5px solid var(--leaf);
+  background: linear-gradient(135deg, #effff5, #eefcff);
   scroll-margin-top: 78px;
 }
 
@@ -482,7 +522,7 @@ select {
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
   padding: 18px;
-  border-top: 4px solid var(--sky);
+  border-top: 5px solid var(--ocean);
 }
 
 .transport-options p {
