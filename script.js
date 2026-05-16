@@ -66,7 +66,10 @@ function updateItinerary() {
   list.innerHTML = "";
   title.textContent = `Suggested ${length}-day ${label} itinerary`;
   document.querySelector("#summaryTrip").textContent = `${length}-day ${label}`;
-  document.querySelector("#summaryBase").textContent = recommendedBases[type];
+  const selectedLodging = document.querySelector(".select-lodging.selected");
+  if (!selectedLodging) {
+    document.querySelector("#summaryLodging").textContent = `Recommended: ${recommendedBases[type]}`;
+  }
   currentItineraryItems = itineraries[type][length];
   currentDayIndex = 0;
 
@@ -129,10 +132,6 @@ function updateSavedActivities() {
   });
 }
 
-document.querySelectorAll("[data-toast]").forEach((button) => {
-  button.addEventListener("click", () => showToast(button.dataset.toast));
-});
-
 document.querySelectorAll(".select-lodging").forEach((button) => {
   button.addEventListener("click", () => {
     const lodging = button.dataset.lodging;
@@ -157,7 +156,7 @@ document.querySelector("#bookingForm").addEventListener("submit", (event) => {
   const arrival = document.querySelector("#arrivalDate").value;
   const guests = document.querySelector("#guestCount").value;
 
-  if (lodging === "Not selected") {
+  if (lodging.startsWith("Recommended:")) {
     showToast("Select a hotel before confirming");
     return;
   }
